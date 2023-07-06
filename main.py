@@ -74,7 +74,7 @@ class Formulario_login(FlaskForm):
 #Pagina de inicio
 @app.route("/")
 def index():
-    return render_template("homepage.html")
+    return render_template("landing_page.html")
 
 #Pagina de ADMIN
 @app.route("/admins", methods = ["GET", "POST"])
