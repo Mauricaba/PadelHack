@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, flash 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField,  PasswordField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
@@ -33,17 +33,17 @@ class Usuarios(db.Model, UserMixin):
     rol = db.Column(db.String(20), nullable = False)
     email = db.Column(db.String(100), nullable = False, unique = True)
     cedula = db.Column(db.String(50), nullable = False)
-    contacto = db.Column(db.String(50), nullable = False)
+    telefono = db.Column(db.String(50), nullable = False)
     contraseña = db.Column(db.String(20), nullable = False)
     date_added = db.Column(db.DateTime, default = datetime.utcnow)
 
-    def __init__(self,user_name,nombre, rol, email, cedula, contacto, contraseña):
+    def __init__(self,user_name,nombre, rol, email, cedula, telefono, contraseña):
         self.user_name = user_name
         self.nombre = nombre 
         self.rol = rol
         self.email = email 
         self.cedula = cedula
-        self.contacto = contacto 
+        self.telefono = telefono
         self.contraseña = contraseña 
 
 
@@ -61,7 +61,7 @@ class Datos_usuarios(FlaskForm):
     rol = StringField ("Rol", validators=[DataRequired()])
     email = StringField ("E-mail", validators=[DataRequired()])
     cedula = StringField("Cedula de identidad", validators=[DataRequired()])
-    contacto = StringField("Numero de telefono", validators=[DataRequired()])
+    telefono = StringField("Numero de telefono", validators=[DataRequired()])
     contraseña = PasswordField("Contraseña", validators=[DataRequired()])
     submit = SubmitField ("Crear cuenta")
 
@@ -122,26 +122,23 @@ def register():
     formulario = Datos_usuarios()
 
     #Validamos el formulario
-    if formulario.validate_on_submit():
-
+    if request.method == "POST":
         #Hacemos un query a la base de datos a traves del email
         usuario = Usuarios.query.filter_by(email=formulario.email.data).first()
         #Si no hay un usuario con el mail ingresado agregalo a la base de datos.
         if usuario is None:
-            user = Usuarios(user_name = formulario.user_name.data, nombre = formulario.nombre.data,rol = formulario.rol.data, email = formulario.email.data, cedula = formulario.cedula.data, contacto = formulario.contacto.data,contraseña = formulario.contraseña.data)
-
+            user_name = request.form['user_name']
+            nombre = request.form['nombre']
+            rol = request.form['rol']
+            email = request.form['email']
+            cedula = request.form['cedula']
+            telefono = request.form['telefono']
+            contraseña = request.form['contraseña']
+            
         #lo agregamos a la base de datos
-            db.session.add(user)
+            nuevo_usuario = Usuarios(user_name, nombre, rol, email, cedula, telefono, contraseña)
+            db.session.add(nuevo_usuario)
             db.session.commit()
-
-        #Limpia los campos de los inputs
-        formulario.user_name.data = ""
-        formulario.nombre.data = ""
-        formulario.rol.data = ""
-        formulario.email.data = ""
-        formulario.cedula.data = ""
-        formulario.contacto.data = ""
-        formulario.contraseña.data = ""
 
     usuarios_registrados = Usuarios.query.order_by(Usuarios.date_added)
 
@@ -160,7 +157,7 @@ def update(id):
         current_user.email = form.email.data
         current_user.nombre = form.nombre.data
         current_user.cedula = form.cedula.data
-        current_user.contacto = form.contacto.data
+        current_user.telefono = form.telefono.data
         current_user.contraseña = form.contraseña.data
         db.session.commit()
 
@@ -171,7 +168,7 @@ def update(id):
     form.email.data = current_user.email
     form.nombre.data = current_user.nombre
     form.cedula.data = current_user.cedula
-    form.contacto.data = current_user.contacto
+    form.telefono.data = current_user.telefono
 
     return render_template('update.html', form=form, current_user=current_user, id=id)
 
