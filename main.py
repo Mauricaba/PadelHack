@@ -59,7 +59,7 @@ class Datos_usuarios(FlaskForm):
     user_name = StringField ("Nombre de usuario", validators=[DataRequired()])
     nombre = StringField ("Nombre y Apellido", validators=[DataRequired()])
     rol = StringField ("Rol", validators=[DataRequired()])
-    email = StringField ("E-mail", validators=[DataRequired(), Email()])
+    email = StringField ("E-mail", validators=[DataRequired()])
     cedula = StringField("Cedula de identidad", validators=[DataRequired()])
     contacto = StringField("Numero de telefono", validators=[DataRequired()])
     contraseña = PasswordField("Contraseña", validators=[DataRequired()])
@@ -74,7 +74,7 @@ class Formulario_login(FlaskForm):
 #Pagina de inicio
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("homepage.html")
 
 #Pagina de ADMIN
 @app.route("/admins", methods = ["GET", "POST"])
@@ -116,8 +116,8 @@ def dashboard():
 
 
 #Ruta de registro de usuario
-@app.route("/signup", methods = ["GET", "POST"] )
-def signup():
+@app.route("/register", methods = ["GET", "POST"] )
+def register():
     nombre = None
     formulario = Datos_usuarios()
 
@@ -145,7 +145,7 @@ def signup():
 
     usuarios_registrados = Usuarios.query.order_by(Usuarios.date_added)
 
-    return render_template("registro.html",  formulario = formulario, usuarios_registrados = usuarios_registrados)
+    return render_template("register.html",  formulario = formulario, usuarios_registrados = usuarios_registrados)
 
 
 # Actualizar datos en la DB
