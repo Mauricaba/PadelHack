@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Editar Usuario</h2>
+  <form method="POST" action="{{ url_for('admin_edit', id=usuario_editar.id) }}">
+    
+    {{ formulario.hidden_tag() }}
+
+    <div class="mb-3">{{ formulario.user_name.label(class="form-label")}} {{ formulario.user_name(class="form-control") }}</div>
+    <div>{{ formulario.nombre.label(class="form-label") }} {{ formulario.nombre(class="form-control")}}</div>
+    <div>{{ formulario.email.label(class="form-label") }} {{ formulario.email(class="form-control")}}</div>
+    <div>{{ formulario.rol.label(class="form-label") }} {{ formulario.rol(class="form-control")}}</div>
+    <div>{{ formulario.cedula.label(class="form-label") }} {{ formulario.cedula(class="form-control")}}</div>
+    <div>{{ formulario.telefono.label(class="form-label") }} {{ formulario.telefono(class="form-control")}}</div>
+    <div>{{ formulario.contraseña.label(class="form-label") }} {{ formulario.contraseña(class="form-control")}}</div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+  </form>
+{% endblock %}

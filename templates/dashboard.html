@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
   <body>
+    {% if current_user.is_authenticated%}
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
       <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
@@ -151,8 +153,10 @@
                     </a>
                   </li>
                   {% endif %}
+
+                  {% if current_user.is_authenticated%}
                   <li>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                    <a href="{{url_for('logout')}}" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                       <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
@@ -160,6 +164,7 @@
                       Cerrar sesion
                     </a>
                   </li>
+                  {% endif %}
                 </ul>
               </li>
               <li class="-mx-6 mt-auto">
@@ -177,14 +182,51 @@
       <main class="lg:pl-72">
         <div class="xl:pr-96">
           <div class="px-6 py-10 sm:px-6 lg:px-8 lg:py-6">
-            <!-- Main area -->
+
+<!-- Main area -->
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:p-6">
+    <div class="h-full">
+      <div class="border-b-2 block md:flex">
+    
+        <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
+          <div class="flex justify-between">
+            <span class="text-xl font-semibold block">Perfil de {{current_user.nombre}}</span>
+            <a href="{{url_for('update', id=current_user.id)}}" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Edit</a>
+          </div>
+    
+          <span class="text-gray-600">This information is secret so be careful</span>
+          <div class="w-full p-8 mx-2 flex justify-center">
+            <img id="showImage" class="max-w-xs w-32 items-center border" src="static/noname.png" alt="">                          
+            </div>
+        </div>
+        
+        <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
+          <div class="rounded  shadow p-6">
+            <div class="pb-6">
+              <label for="name" class="font-semibold text-gray-700 block pb-1">Name</label>
+              <div class="flex">
+                <input disabled id="username" class="border-1  rounded-r px-4 py-2 w-full" type="text" value="{{current_user.nombre}}" />
+              </div>
+            </div>
+            <div class="pb-4">
+              <label for="about" class="font-semibold text-gray-700 block pb-1">Email</label>
+              <input disabled id="email" class="border-1  rounded-r px-4 py-2 w-full" type="email" value="{{current_user.email}}" />
+              <span class="text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
+            </div>
           </div>
         </div>
-      </main>
-
-      <!-- <aside class="fixed inset-y-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
-        Secondary column (hidden on smaller screens)
-      </aside> -->
+    
+      </div>
+    
     </div>
+  </div>
+</div>
+</div>
+</div>
+</main>
+    </div>
+    {% endif %}
   </body>
+
 {% endblock %}

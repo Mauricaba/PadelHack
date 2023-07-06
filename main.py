@@ -110,6 +110,7 @@ def logout():
 
 #DASHBOARD
 @app.route('/dashboard', methods = ["GET", "POST"])
+@login_required
 def dashboard():
     return render_template("dashboard.html")
 
@@ -150,27 +151,22 @@ def register():
 @login_required
 def update(id):
     form = Datos_usuarios()
+    usuario = Usuarios.query.get(id)
+    if request.method == "POST":
 
-    if request.method == "POST" and form.validate():
-        current_user.user_name = form.user_name.data
-        current_user.rol = form.rol.data
-        current_user.email = form.email.data
-        current_user.nombre = form.nombre.data
-        current_user.cedula = form.cedula.data
-        current_user.telefono = form.telefono.data
-        current_user.contraseña = form.contraseña.data
+        current_user.user_name = request.form['user_name']
+        usuario.nombre = request.form['nombre']
+        usuario.rol = request.form['rol']
+        usuario.email = request.form['email']
+        usuario.cedula = request.form['cedula']
+        usuario.telefono = request.form['telefono']
+        usuario.contraseña = request.form['contraseña']
+
         db.session.commit()
+        print(current_user)
 
         return redirect(url_for('dashboard'))
-
-    form.user_name.data = current_user.user_name
-    form.rol.data = current_user.rol
-    form.email.data = current_user.email
-    form.nombre.data = current_user.nombre
-    form.cedula.data = current_user.cedula
-    form.telefono.data = current_user.telefono
-
-    return render_template('update.html', form=form, current_user=current_user, id=id)
+    return render_template('update.html', form=form, usuario=usuario, id=id)
 
 #Eliminar Usuario
 @app.route("/eliminar_usuario/<int:id>", methods=["GET", "POST"])
@@ -185,9 +181,9 @@ def eliminar_usuario(id):
         db.session.commit()
         return redirect(url_for("dashboard"))
     
-@app.route("/editar_usuario/<int:id>", methods = ["GET","POST"])
+@app.route("/admin_edit/<int:id>", methods = ["GET","POST"])
 @login_required
-def editar_usuario(id):
+def admin_edit(id):
     
     usuario_editar = Usuarios.query.get_or_404(id)
     #Le pasamos el objeto Usuario_editar para que los campos se rellenen automaticamente con los datos del usuario seleccionado
@@ -200,7 +196,7 @@ def editar_usuario(id):
 
             return redirect(url_for('admins'))
 
-    return render_template('editar_usuario.html', formulario=formulario, usuario_editar=usuario_editar)
+    return render_template('admin_edit.html', formulario=formulario, usuario_editar=usuario_editar)
 
 
 
