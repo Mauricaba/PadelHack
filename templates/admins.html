@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+<h1>Pagina del admin</h1>
+
+{%for usuario in usuarios%}
+<tr>
+<td>{{usuario.id}}-</td>
+<td>{{usuario.user_name}} </td>
+<td>{{usuario.nombre}}</td>
+<td>{{usuario.rol}} </td>
+<a href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a></td>
+<a href="{{ url_for('eliminar_usuario', id=usuario.id)}}" class="btn btn-outline-danger btn-sm">Eliminar</a></td> 
+</tr><br>
+
+
+{%endfor%}
+
+{% endblock %}
