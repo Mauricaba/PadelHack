@@ -106,7 +106,7 @@ def login():
 @login_required
 def logout():   
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
 #DASHBOARD
 @app.route('/dashboard', methods = ["GET", "POST"])
@@ -185,18 +185,18 @@ def eliminar_usuario(id):
 @login_required
 def admin_edit(id):
     
-    usuario_editar = Usuarios.query.get_or_404(id)
+    usuario = Usuarios.query.get_or_404(id)
     #Le pasamos el objeto Usuario_editar para que los campos se rellenen automaticamente con los datos del usuario seleccionado
-    formulario = Datos_usuarios(obj=usuario_editar)
+    formulario = Datos_usuarios(obj=usuario)
     
     if current_user.rol == "Admin":
         if request.method == 'POST' and formulario.validate():
-            formulario.populate_obj(usuario_editar)
+            formulario.populate_obj(usuario)
             db.session.commit()
 
             return redirect(url_for('admins'))
 
-    return render_template('admin_edit.html', formulario=formulario, usuario_editar=usuario_editar)
+    return render_template('update.html', formulario=formulario, usuario=usuario)
 
 
 
