@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 <body>
   <div class="block lg:flex lg:flex-1">
     <span class="px-4 py-2" aria-hidden="true">&larr;</span>
-    <a href="/home" class="py-2 font-semibold leading-6 text-gray-900"> Volver al Home</a>
+    <a href="/" class="py-2 font-semibold leading-6 text-gray-900"> Volver al Home</a>
   </div>
-  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="flex min-h-full flex-col justify-center px-6 py-2 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img href="/home" class="mx-auto h-24 w-auto" src="static/LogoPadelHack.svg" alt="PadelHack">
+      <img href="/" class="mx-auto h-24 w-auto" src="static/LogoPadelHack.svg" alt="PadelHack">
       <div class="flex justify-center">
-      <a href="#" class="text-5xl font-bold leading-9 tracking-tight text-[#003b57]">PadelHack</a>
+      <a href="#" class="text-5xl font-bold leading-6 tracking-tight text-[#003b57]">PadelHack</a>
       </div>
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Iniciar sesion</h2>
     </div>
@@ -34,7 +33,7 @@
             </div>
           </div>
           <div class="mt-2">
-            <input id="contraseña" name="contraseña" type="contraseña" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input id="contraseña" name="contraseña" type="contraseña" autocomplete="" required class="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 

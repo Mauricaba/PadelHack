@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#fafefd]">
+<html lang="en" class="h-full bg-casiwhite">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PadelHacK</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+              'oscurito': '#011b35',
+              'azul': '#003b57',
+              'celeste': '#9dc3d7',
+              'celestito': '#d2dfe6',
+              'casiwhite': '#fafefd',
+          }
+        }
+      }
+    }
+  </script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
 <body class="h-full">
-  {% block content %}
-  <h1> Hola Base </h1>
-  {% endblock %}
+  <div>
+    {% block content %}
+    <h1> Hola Base </h1>
+    {% endblock %}
+  </div>
 </body>
 </html>
