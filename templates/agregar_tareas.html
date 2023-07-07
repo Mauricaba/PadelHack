@@ -1,0 +1,19 @@
+
+
+
+  <!-- agregar_tareas.html -->
+
+<form action="{{ url_for('agregar_tareas') }}" method="POST">
+    {{ formulario.csrf_token }}
+    <div>
+      <label for="nombre">Nombre de la tarea:</label>
+      <input type="text" id="nombre" name="nombre" required>
+    </div>
+    <div>
+      <label for="descripcion">Descripción de la tarea:</label>
+      <textarea id="descripcion" name="descripcion" required></textarea>
+    </div>
+
+    <button type="submit">Agregar tarea</button>
+  </form>
+  
