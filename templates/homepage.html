@@ -1,3 +1,165 @@
-<h1>PAGINA DE INICIO</h1>
+{% extends 'base.html' %}
 
-<a href="{{url_for('admins')}}">Admin</a>
+
+
+{% block content %}
+{% include 'navbar.html' %}
+  <section class="py-8">
+    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+      <div class="flex flex-wrap items-center mx-auto max-w-7xl">
+        <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
+          <div>
+            <div class="relative w-full max-w-lg">
+              <div class="absolute top-0 rounded-full bg-violet-300 -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+              <div class="absolute rounded-full bg-fuchsia-300 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+              <div class="relative">
+                <img class="object-cover object-center mx-auto rounded-lg shadow-2xl" alt="hero" src="static/padelcito.png">
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="flex flex-col items-start mt-12 mb-16 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
+          <span class="mb-8 text-xs font-bold tracking-widest text-blue-600 uppercase"> Fácil y sencillo como nunca viste. </span>
+          <h1 class="mb-8 text-4xl font-bold leading-none tracking-tighter text-neutral-600 md:text-7xl lg:text-5xl">PadelHack</h1>
+          <p class="mb-8 text-base leading-relaxed text-left text-gray-500">Canchas y reservas en toda tu zona &amp; más fácil que nunca.</p>
+          <div class="mt-0 lg:mt-6 max-w-7xl sm:flex">
+            <div class="mt-3 rounded-lg sm:mt-0">
+              <button href="/login" class="items-center block px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Empeza a usar</button>
+            </div>
+            <div class="mt-3 rounded-lg sm:mt-0 sm:ml-3">
+              <button href="/register" class="items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Inicia Sesion</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seccion media -->
+  <section>
+    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+      <div class="flex flex-col w-full mb-12 text-center">
+        <h1 class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
+          Reservas al alcance de tu mano
+        </h1>
+        <p class="max-w-xl mx-auto mt-8 text-base leading-relaxed text-center text-gray-500">Los usuarios pueden explorar una lista completa de canchas de pádel disponibles en diversas ubicaciones. Nuestro sistema proporciona información detallada sobre cada cancha, incluyendo su ubicación, características, tarifas y horarios disponibles. Los jugadores pueden elegir la cancha que mejor se ajuste a sus necesidades y seleccionar un horario disponible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seccion inferior -->
+  <section>
+    <div class="2xl:max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24 2xl:px-12 px-4 py-12 mx-auto">
+      <div class="2xl:max-w-7xl flex flex-wrap items-center mx-auto">
+        <div class="lg:flex-grow lg:w-1/2 lg:pr-24 md:mb-0 flex flex-col items-start mb-16 text-left">
+          <div class="md:grid-cols-2 grid grid-cols-1 gap-12">
+            <div>
+              <div class="bg-blue-50 inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-aperture w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(72 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(144 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(216 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(288 12 12)"></line>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="text-neutral-600 mb-3 text-lg font-medium tracking-tighter">Short title</h2>
+                <p class="text-base leading-relaxed text-gray-500">Explain 2 great feature here. Information about the feature.</p>
+                <a href="#" class="md:mb-2 lg:mb-0 hover:text-blue-500 inline-flex items-center mt-6 font-semibold text-blue-600" title="read more">
+                  Learn More
+                  <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="bg-blue-50 inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-aperture w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(72 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(144 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(216 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(288 12 12)"></line>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="text-neutral-600 mb-3 text-lg font-medium tracking-tighter">Short title</h2>
+                <p class="text-base leading-relaxed text-gray-500">Explain 2 great feature here. Information about the feature.</p>
+                <a href="#" class="md:mb-2 lg:mb-0 hover:text-blue-500 inline-flex items-center mt-6 font-semibold text-blue-600" title="read more">
+                  Learn More
+                  <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="bg-blue-50 inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-aperture w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(72 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(144 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(216 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(288 12 12)"></line>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="text-neutral-600 mb-3 text-lg font-medium tracking-tighter">Short title</h2>
+                <p class="text-base leading-relaxed text-gray-500">Explain 2 great feature here. Information about the feature.</p>
+                <a href="#" class="md:mb-2 lg:mb-0 hover:text-blue-500 inline-flex items-center mt-6 font-semibold text-blue-600" title="read more">
+                  Learn More
+                  <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="bg-blue-50 inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-aperture w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(72 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(144 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(216 12 12)"></line>
+                  <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(288 12 12)"></line>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="text-neutral-600 mb-3 text-lg font-medium tracking-tighter">Short title</h2>
+                <p class="text-base leading-relaxed text-gray-500">Explain 2 great feature here. Information about the feature.</p>
+                <a href="#" class="md:mb-2 lg:mb-0 hover:text-blue-500 inline-flex items-center mt-6 font-semibold text-blue-600" title="read more">
+                  Learn More
+                  <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-5/6 lg:max-w-lg rounded-xl xl:mt-0 w-full mt-12">
+          <div>
+            <img class="object-cover object-center mx-auto rounded-lg shadow-2xl" alt="hero" src="/assets/images/placeholders/squareCard.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% include 'footer.html' %}
+{% endblock %}

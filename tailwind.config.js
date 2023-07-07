@@ -7,11 +7,23 @@ module.exports = {
       "./src/**/*.{html,js}",
   ],
   theme: {
-    extend: {},
+    extend: {,
   },
-  plugins: [
-    require("flowbite/plugin"),
-    require('@tailwindcss/forms'),
+    colors: {
+      'oscurito': '#011b35',
+      'azul': '#003b57',
+      'celeste': '#9dc3d7',
+      'celestito': '#d2dfe6',
+      'casiwhite': '#fafefd',
+  },
+    fontFamily: {
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+  },
+    plugins: [
+      require("flowbite/plugin"),
+      require('@tailwindcss/forms'),
   ],
+}
 }
 
