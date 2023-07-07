@@ -92,7 +92,7 @@ class FormularioTarea(FlaskForm):
 #Pagina de inicio
 @app.route("/")
 def index():
-    return render_template("landing_page.html")
+    return render_template("homepage.html")
 
 #Pagina de ADMIN
 @app.route("/admins", methods = ["GET", "POST"])
