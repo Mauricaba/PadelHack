@@ -1,19 +1,58 @@
-
-
-
   <!-- agregar_tareas.html -->
+{% extends 'base.html' %}
 
-<form action="{{ url_for('agregar_tareas') }}" method="POST">
-    {{ formulario.csrf_token }}
-    <div>
-      <label for="nombre">Nombre de la tarea:</label>
-      <input type="text" id="nombre" name="nombre" required>
-    </div>
-    <div>
-      <label for="descripcion">Descripción de la tarea:</label>
-      <textarea id="descripcion" name="descripcion" required></textarea>
-    </div>
+{% include 'navbar.html' %}
 
-    <button type="submit">Agregar tarea</button>
-  </form>
-  
+{% block content %}
+{% if current_user.is_authenticated %}
+<div class="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+  <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
+    <defs>
+      <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="50%" y="-64" patternUnits="userSpaceOnUse">
+        <path d="M100 200V.5M.5 .5H200" fill="none" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" stroke-width="0" fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" />
+  </svg>
+  <div class="mx-auto max-w-xl lg:max-w-4xl">
+    <h2 class="text-4xl font-bold tracking-tight text-gray-900"> Agregar tareas </h2>
+    <p class="mt-2 text-lg leading-8 text-gray-600">Puedes agregar tareas para tus funcionarios aquí.</p>
+    <div class="mt-16 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
+      <!-- inicio del Form -->
+      <form action="{{ url_for('agregar_tareas') }}" method="POST" class="lg:flex-auto">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+          <div>
+            <label for="nombre" class="block text-sm font-semibold leading-6 text-gray-900">Nombre de la Tarea: </label>
+            <div class="mt-2.5">
+              <input type="url" name="website" id="website" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="descripcion" class="block text-sm font-semibold leading-6 text-gray-900">Descripción: </label>
+            <div class="mt-2.5">
+              <textarea id="descripcion" name="descripcion" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="mt-10">
+          <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Agregar tarea </button>
+        </div>
+      </form>
+
+      <div class="lg:mt-6 lg:w-80 lg:flex-none">
+        <img class="h-24 w-auto" src="static/LogoPadelHack.svg" alt="">
+        <figure class="mt-10">
+          <figcaption class="mt-10 flex gap-x-6">
+            <img src="static/noname.png" alt="" class="h-12 w-12 flex-none rounded-full bg-gray-50">
+            <div>
+              <div class="text-base font-semibold text-gray-900">{{current_user.nombre}}</div>
+              <div class="text-sm leading-6 text-gray-600">Nombre de Admin</div>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
