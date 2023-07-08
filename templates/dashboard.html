@@ -223,15 +223,20 @@
     </div>
   </div>
 </div>
-{% for tarea in tareas%}
+{% if current_user.rol == 'Admin' or current_user.rol == 'Funcionario'%}
+  {% for tarea in tareas%}
 
-<p>{{tarea.nombre}}</p><br>
-<p>{{tarea.descripcion}}</p>
+  <p>{{tarea.nombre}}</p><br>
+  <p>{{tarea.descripcion}}</p>
 
-<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-  <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-indigo-600 hover:text-indigo-900">Marcar como completada<span class="sr-only"></span></a>
-</td>
-{% endfor %}
+  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
+    {% if current_user.rol == 'Admin' %}
+    <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-indigo-600 hover:text-indigo-900">Marcar como completada<span class="sr-only"></span></a>
+    {% endif %}
+
+  </td>
+  {% endfor %}
+{% endif %}
 
 </div>
 </div>
