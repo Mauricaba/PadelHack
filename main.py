@@ -268,9 +268,9 @@ def marcar_completada(id):
 
 
 #Ruta de contacto
-@app.route("/contactos")
-def contactos():
-    return render_template("contactos.html")
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 # URL invalida
 @app.errorhandler(404)
