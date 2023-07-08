@@ -46,6 +46,18 @@ class Usuarios(db.Model, UserMixin):
         self.telefono = telefono
         self.contraseña = contraseña 
 
+#Creo la clase para almacenar las tareas
+class Tarea(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    descripcion = db.Column(db.String(500), nullable=False)
+    date_added = db.Column(db.DateTime, default = datetime.utcnow)
+    completada = db.Column(db.Boolean, default=False)
+
+    def __init__(self, nombre, descripcion, completada=False):
+        self.nombre = nombre
+        self.descripcion = descripcion
+        self.completada = completada
 
     # App context se encarga de que se ejecute create all en el contexto de flask, para evitar errores en la config de la db. 
 with app.app_context():
@@ -65,16 +77,22 @@ class Datos_usuarios(FlaskForm):
     contraseña = PasswordField("Contraseña", validators=[DataRequired()])
     submit = SubmitField ("Crear cuenta")
 
+#Formulario para el login
 class Formulario_login(FlaskForm):
     user_name = StringField ("Nombre de usuario", validators=[DataRequired()])
     contraseña = PasswordField("Contraseña", validators=[DataRequired()])
     submit = SubmitField ("Iniciar Sesion")
 
+#Formulario para las tareas
+class FormularioTarea(FlaskForm):
+    nombre = StringField("Nombre de la tarea", validators=[DataRequired()])
+    descripcion = StringField("Describe la tarea", validators=[DataRequired()])
+    submit = SubmitField("Agregar tarea")
 
 #Pagina de inicio
 @app.route("/")
 def index():
-    return render_template("landing_page.html")
+    return render_template("homepage.html")
 
 #Pagina de ADMIN
 @app.route("/admins", methods = ["GET", "POST"])
@@ -106,14 +124,15 @@ def login():
 @login_required
 def logout():   
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
 #DASHBOARD
 @app.route('/dashboard', methods = ["GET", "POST"])
+@login_required
+
 def dashboard():
-    return render_template("dashboard.html")
-
-
+    tareas = Tarea.query.all()
+    return render_template("dashboard.html",tareas=tareas)
 
 #Ruta de registro de usuario
 @app.route("/register", methods = ["GET", "POST"] )
@@ -144,38 +163,35 @@ def register():
 
     return render_template("register.html",  formulario = formulario, usuarios_registrados = usuarios_registrados)
 
-
 # Actualizar datos en la DB
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
 def update(id):
     form = Datos_usuarios()
+    usuario = Usuarios.query.get(id)
+    if request.method == "POST":
 
-    if request.method == "POST" and form.validate():
-        current_user.user_name = form.user_name.data
-        current_user.rol = form.rol.data
-        current_user.email = form.email.data
-        current_user.nombre = form.nombre.data
-        current_user.cedula = form.cedula.data
-        current_user.telefono = form.telefono.data
-        current_user.contraseña = form.contraseña.data
+        usuario.user_name = request.form['user_name']
+        usuario.nombre = request.form['nombre']
+        usuario.rol = request.form['rol']
+        usuario.email = request.form['email']
+        usuario.cedula = request.form['cedula']
+        usuario.telefono = request.form['telefono']
+        usuario.contraseña = request.form['contraseña']
+
         db.session.commit()
+        print(current_user)
 
         return redirect(url_for('dashboard'))
-
-    form.user_name.data = current_user.user_name
-    form.rol.data = current_user.rol
-    form.email.data = current_user.email
-    form.nombre.data = current_user.nombre
-    form.cedula.data = current_user.cedula
-    form.telefono.data = current_user.telefono
-
-    return render_template('update.html', form=form, current_user=current_user, id=id)
+    return render_template('update.html', form=form, usuario=usuario, id=id)
 
 #Eliminar Usuario
 @app.route("/eliminar_usuario/<int:id>", methods=["GET", "POST"])
 @login_required
 def eliminar_usuario(id):
+    if current_user.rol != "Admin":
+        return redirect(url_for("dashboard"))
+
     usuario_eliminar = Usuarios.query.get_or_404(id)
     rol = current_user.rol
     #verifica si el usuario actual es el admin
@@ -185,23 +201,62 @@ def eliminar_usuario(id):
         db.session.commit()
         return redirect(url_for("dashboard"))
     
-@app.route("/editar_usuario/<int:id>", methods = ["GET","POST"])
+@app.route("/admin_edit/<int:id>", methods = ["GET","POST"])
 @login_required
-def editar_usuario(id):
+def admin_edit(id):
+    if current_user.rol != "Admin":
+        return redirect(url_for("dashboard"))
+
     
-    usuario_editar = Usuarios.query.get_or_404(id)
+    usuario = Usuarios.query.get_or_404(id)
     #Le pasamos el objeto Usuario_editar para que los campos se rellenen automaticamente con los datos del usuario seleccionado
-    formulario = Datos_usuarios(obj=usuario_editar)
+    formulario = Datos_usuarios(obj=usuario)
     
     if current_user.rol == "Admin":
         if request.method == 'POST' and formulario.validate():
-            formulario.populate_obj(usuario_editar)
+            formulario.populate_obj(usuario)
             db.session.commit()
 
             return redirect(url_for('admins'))
 
-    return render_template('editar_usuario.html', formulario=formulario, usuario_editar=usuario_editar)
+    return render_template('update.html', formulario=formulario, usuario=usuario)
 
+#Ruta para crear las tareas
+@app.route("/agregar_tareas", methods=["GET", "POST"])
+@login_required
+def agregar_tareas():
+    if current_user.rol != "Admin":
+        return redirect(url_for("dashboard"))
+
+    formulario = FormularioTarea()
+
+    if request.method == "POST":
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+
+
+        
+        nueva_tarea = Tarea(nombre=nombre, descripcion=descripcion, )
+        db.session.add(nueva_tarea)
+        db.session.commit()
+
+        return redirect(url_for("dashboard"))
+
+    return render_template("agregar_tareas.html", formulario=formulario)
+
+#Para marcar la tarea como completada
+@app.route("/marcar_completada/<int:id>", methods=["GET","POST"])
+@login_required
+def marcar_completada(id):
+    tarea = Tarea.query.get_or_404(id)
+
+    if current_user.rol != "Admin":
+        return redirect(url_for('dashboard'))
+    
+    tarea.completada = True
+    db.session.commit()
+
+    return redirect(url_for("dashboard", tarea=tarea))
 
 
 if __name__ == "__main__":

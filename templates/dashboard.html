@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
   <body>
+    {% if current_user.is_authenticated%}
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
       <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
@@ -69,7 +71,7 @@
                       </li>
                       {% if current_user.rol == 'Admin' or current_user.rol == 'Funcionario'%}
                       <li>
-                        <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                        <a href="{{url_for('agregar_tareas')}}" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                           </svg>
@@ -96,18 +98,19 @@
       </div>
 
       <!-- Static sidebar for desktop -->
-      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
           <div class="flex h-16 shrink-0 items-center">
             <img class="h-8 w-auto" src="static/LogoPadelHack.svg" alt="PadelHack">
+            <a href="/" class="text-xl px-2 leading-6 text-blue font-bold hover:text-gray-900">PadelHack</a>
           </div>
           <nav class="flex flex-1 flex-col">
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" class="-mx-2 space-y-1">
                   <li>
-                    <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
+                    
                     <a href="#" class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                       <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -143,7 +146,7 @@
                   </li>
                   {% if current_user.rol == 'Admin' or current_user.rol == 'Funcionario'%}
                   <li>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                    <a href="{{url_for('agregar_tareas')}}" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                       <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                       </svg>
@@ -151,8 +154,10 @@
                     </a>
                   </li>
                   {% endif %}
+
+                  {% if current_user.is_authenticated%}
                   <li>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                    <a href="{{url_for('logout')}}" class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                       <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
@@ -160,11 +165,12 @@
                       Cerrar sesion
                     </a>
                   </li>
+                  {% endif %}
                 </ul>
               </li>
               <li class="-mx-6 mt-auto">
                 <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
-                  <img class="h-8 w-8 rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                  <img class="h-8 w-8 rounded-full bg-gray-50" src="static/noname.png" alt="">
                   <span class="sr-only">Mi perfil</span>
                   <span aria-hidden="true">Mauricio Cabañas</span>
                 </a>
@@ -175,16 +181,63 @@
       </div>
 
       <main class="lg:pl-72">
-        <div class="xl:pr-96">
+        <div class="xl:pr-20">
           <div class="px-6 py-10 sm:px-6 lg:px-8 lg:py-6">
-            <!-- Main area -->
+
+<!-- Main area -->
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:p-6">
+    <div class="h-full">
+      <div class="border-b-2 block md:flex">
+      
+        <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
+          <div class="flex justify-between">
+            <span class="text-xl font-semibold block">Perfil de {{current_user.nombre}}</span>
+            <a href="{{url_for('update', id=current_user.id)}}" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Edit</a>
+          </div>
+    
+          <span class="text-gray-600">This information is secret so be careful</span>
+          <div class="w-full p-8 mx-2 flex justify-center">
+            <img id="showImage" class="max-w-xs w-32 items-center border" src="static/noname.png" alt="">                          
+            </div>
+        </div>
+        
+        <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
+          <div class="rounded  shadow p-6">
+            <div class="pb-6">
+              <label for="name" class="font-semibold text-gray-700 block pb-1">Nombre</label>
+              <div class="flex">
+                <input disabled id="username" class="border-1  rounded-r px-4 py-2 w-full" type="text" value="{{current_user.nombre}}" />
+              </div>
+            </div>
+            <div class="pb-4">
+              <label for="about" class="font-semibold text-gray-700 block pb-1">Email</label>
+              <input disabled id="email" class="border-1  rounded-r px-4 py-2 w-full" type="email" value="{{current_user.email}}" />
+              <span class="text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
+            </div>
           </div>
         </div>
-      </main>
-
-      <!-- <aside class="fixed inset-y-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
-        Secondary column (hidden on smaller screens)
-      </aside> -->
+    
+      </div>
+    
     </div>
+  </div>
+</div>
+{% for tarea in tareas%}
+
+<p>{{tarea.nombre}}</p><br>
+<p>{{tarea.descripcion}}</p>
+
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
+  <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-indigo-600 hover:text-indigo-900">Marcar como completada<span class="sr-only"></span></a>
+</td>
+{% endfor %}
+
+</div>
+</div>
+</main>
+    </div>
+    {% endif %}
   </body>
+
 {% endblock %}
