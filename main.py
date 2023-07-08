@@ -158,6 +158,7 @@ def register():
             nuevo_usuario = Usuarios(user_name, nombre, rol, email, cedula, telefono, contraseña)
             db.session.add(nuevo_usuario)
             db.session.commit()
+            return redirect(url_for("login"))
 
     usuarios_registrados = Usuarios.query.order_by(Usuarios.date_added)
 
