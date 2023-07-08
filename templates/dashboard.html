@@ -5,17 +5,10 @@
   <body>
     {% if current_user.is_authenticated%}
     <div>
-      <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
       <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
-        <!--
-          Off-canvas menu backdrop, show/hide based on off-canvas menu state.
-        -->
         <div class="fixed inset-0 bg-gray-900/80"></div>
-
         <div class="fixed inset-0 flex">
-
           <div class="relative mr-16 flex w-full max-w-xs flex-1">
-
             <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
               <button type="button" class="-m-2.5 p-2.5">
                 <span class="sr-only">Close sidebar</span>
@@ -183,106 +176,79 @@
       <main class="lg:pl-72">
         <div class="xl:pr-20">
           <div class="px-6 py-10 sm:px-6 lg:px-8 lg:py-6">
-
-<!-- Main area -->
-<div class="overflow-hidden bg-white shadow sm:rounded-lg">
-  <div class="px-4 py-5 sm:p-6">
-    <div class="h-full">
-      <div class="border-b-2 block md:flex">
-        <!-- Cardboard del perfil -->
-        <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
-          <div class="flex justify-between">
-            <span class="text-xl font-semibold block">Perfil de {{current_user.nombre}}</span>
-            <a href="{{url_for('update', id=current_user.id)}}" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Edit</a>
-          </div>
-    
-          <span class="text-gray-600">This information is secret so be careful</span>
-          <div class="w-full p-8 mx-2 flex justify-center">
-            <img id="showImage" class="max-w-xs w-32 items-center border" src="static/noname.png" alt="">                          
-            </div>
-        </div>
-        
-        <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
-          <div class="rounded  shadow p-6">
-            <div class="pb-6">
-              <label for="name" class="font-semibold text-gray-700 block pb-1">Nombre</label>
-              <div class="flex">
-                <input disabled id="username" class="border-1  rounded-r px-4 py-2 w-full" type="text" value="{{current_user.nombre}}" />
+              <!-- Main area -->
+            <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+              <div class="px-4 py-5 sm:p-6">
+                <div class="h-full">
+                  <div class="border-b-2 block md:flex">
+                    <!-- Cardboard del perfil -->
+                    <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
+                      <div class="flex justify-between">
+                        <span class="text-xl font-semibold block">Perfil de {{current_user.nombre}}</span>
+                        <a href="{{url_for('update', id=current_user.id)}}" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Edit</a>
+                      </div>
+                
+                      <span class="text-gray-600">This information is secret so be careful</span>
+                      <div class="w-full p-8 mx-2 flex justify-center">
+                        <img id="showImage" class="max-w-xs w-32 items-center border" src="static/noname.png" alt="">                          
+                        </div>
+                    </div>
+                    
+                    <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
+                      <div class="rounded  shadow p-6">
+                        <div class="pb-6">
+                          <label for="name" class="font-semibold text-gray-700 block pb-1">Nombre</label>
+                          <div class="flex">
+                            <input disabled id="username" class="border-1  rounded-r px-4 py-2 w-full" type="text" value="{{current_user.nombre}}" />
+                          </div>
+                        </div>
+                        <div class="pb-4">
+                          <label for="about" class="font-semibold text-gray-700 block pb-1">Email</label>
+                          <input disabled id="email" class="border-1  rounded-r px-4 py-2 w-full" type="email" value="{{current_user.email}}" />
+                          <span class="text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
+                        </div>
+                      </div>
+                    </div>
+                
+                  </div>
+                
+                </div>
               </div>
             </div>
-            <div class="pb-4">
-              <label for="about" class="font-semibold text-gray-700 block pb-1">Email</label>
-              <input disabled id="email" class="border-1  rounded-r px-4 py-2 w-full" type="email" value="{{current_user.email}}" />
-              <span class="text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
-            </div>
+
+              <!-- Tareas con checkbox -->
+
+              <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
+                <div class="px-4 py-5 sm:px-6">
+                    <p> Tareas y Mantenimientos </p>
+                </div>
+                <div class="px-4 py-auto sm:p-6">
+                  <fieldset>
+                    <legend class="sr-only">Notifications</legend>
+                    <div class="space-y-5">
+                      {% for tarea in tareas%}
+                      <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input href="{{ url_for('marcar_completada', id=tarea.id) }}" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="comments" class="font-medium text-gray-900">{{tarea.nombre}}</label>
+                          <p id="comments-description" class="text-gray-500">{{tarea.descripcion}}</p>
+                        </div>
+                        <!-- <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
+                          <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-indigo-600 hover:text-indigo-900">Marcar como completada<span class="sr-only"></span></a>
+                        </td> -->
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
           </div>
         </div>
-    
-      </div>
-    
+      </main>
     </div>
-  </div>
-</div>
-
-  <!-- Tareas con checkbox -->
-
-  <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
-    <div class="px-4 py-5 sm:px-6">
-        <p> Tareas </p>
-    </div>
-    <div class="px-4 py-auto sm:p-6">
-      <fieldset>
-        <legend class="sr-only">Notifications</legend>
-        <div class="space-y-5">
-          <div class="relative flex items-start">
-            <div class="flex h-6 items-center">
-              <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-            </div>
-            <div class="ml-3 text-sm leading-6">
-              <label for="comments" class="font-medium text-gray-900">Comments</label>
-              <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-            </div>
-          </div>
-          <div class="relative flex items-start">
-            <div class="flex h-6 items-center">
-              <input id="candidates" aria-describedby="candidates-description" name="candidates" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-            </div>
-            <div class="ml-3 text-sm leading-6">
-              <label for="candidates" class="font-medium text-gray-900">Candidates</label>
-              <p id="candidates-description" class="text-gray-500">Get notified when a candidate applies for a job.</p>
-            </div>
-          </div>
-          <div class="relative flex items-start">
-            <div class="flex h-6 items-center">
-              <input id="offers" aria-describedby="offers-description" name="offers" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-            </div>
-            <div class="ml-3 text-sm leading-6">
-              <label for="offers" class="font-medium text-gray-900">Offers</label>
-              <p id="offers-description" class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-
-
-
-{% for tarea in tareas%}
-
-<p>{{tarea.nombre}}</p><br>
-<p>{{tarea.descripcion}}</p>
-
-<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-  <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-indigo-600 hover:text-indigo-900">Marcar como completada<span class="sr-only"></span></a>
-</td>
-{% endfor %}
-
-</div>
-</div>
-</main>
-    </div>
-    {% endif %}
-  </body>
+      {% endif %}
+</body>
 
 {% endblock %}
