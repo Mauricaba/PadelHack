@@ -86,14 +86,18 @@
                         <img class="h-10 w-10 rounded-full" src="static/noname.png" alt="">
                     </div>
                     <div class="ml-3">
-                        <div class="text-base font-medium text-casiwhite">Usuario</div>
-                        <div class="text-sm font-medium text-gray-400">usuario@example.com</div>
+                        <div class="text-base font-medium text-casiwhite">Hola {{current_user.nombre}}!</div>
+                        <div class="text-sm font-medium text-gray-400"> {{current_user.email}} </div>
                     </div>
                 </div>
                 <div class="mt-3 space-y-1 px-2">
+                    {% if current_user.is_authenticated%}
                     <a href="/dashboard" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:azul hover:text-casiwhite">Mi perfil</a>
                     <a href="/admins" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:azul hover:text-casiwhite">Configuración</a>
                     <a href="{{url_for('logout')}}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:azul hover:text-casiwhite">Cerrar Sesion</a>
+                    {% else %}
+                    <a href="/login" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:azul hover:text-casiwhite">Iniciar Sesion</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
