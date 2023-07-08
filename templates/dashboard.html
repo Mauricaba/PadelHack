@@ -241,20 +241,20 @@
                     <fieldset>
                         <legend class="sr-only">Notifications</legend>
                         <div class="space-y-5">
-                            {% for tarea in tareas %}
+                          {% for tarea in tareas %}
                             <div class="flex items-start">
                                 <div class="flex items-center h-6">
-                                    <input id="checkbox-{{ tarea.id }}" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-azul focus:ring-azul">
+                                    <input id="checkbox-{{ tarea.id }}" aria-describedby="comments-description" name="comments" type="checkbox" {% if tarea.completada %}checked{% else %} {% endif %} class="h-4 w-4 rounded border-gray-300 text-azul focus:ring-azul">
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="checkbox-{{ tarea.id }}" class="font-medium text-gray-900">{{ tarea.nombre }}</label>
                                     <p id="comments-description" class="text-gray-500">{{ tarea.descripcion }}</p>
                                 </div>
                                 <div class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                                    <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-azul hover:text-indigo-900">Marcar como completada</a>
+                                    <a href="{{ url_for('marcar_completada', id=tarea.id) }}" class="text-azul hover:text-indigo-900">Completada</a>
                                 </div>
                             </div>
-                            {% endfor %}
+                          {% endfor %}
                         </div>
                     </fieldset>
                 </div>
@@ -267,3 +267,5 @@
 </body>
 
 {% endblock %}
+
+
