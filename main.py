@@ -109,6 +109,9 @@ def admins():
 #Iniciar sesion
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+
     formulario = Formulario_login()
     #validamos el formulario cuando se envie
     if formulario.validate_on_submit():
@@ -137,6 +140,10 @@ def dashboard():
 #Ruta de registro de usuario
 @app.route("/register", methods = ["GET", "POST"] )
 def register():
+    #Si la sesion esta iniciada el usuario no podra acceder a esta vista 
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+    
     nombre = None
     formulario = Datos_usuarios()
 
@@ -158,6 +165,7 @@ def register():
             nuevo_usuario = Usuarios(user_name, nombre, rol, email, cedula, telefono, contraseña)
             db.session.add(nuevo_usuario)
             db.session.commit()
+            return redirect(url_for("login"))
 
     usuarios_registrados = Usuarios.query.order_by(Usuarios.date_added)
 
@@ -257,6 +265,22 @@ def marcar_completada(id):
     db.session.commit()
 
     return redirect(url_for("dashboard", tarea=tarea))
+
+
+#Ruta de contacto
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+# URL invalida
+@app.errorhandler(404)
+def page_not_found():
+	return render_template("404.html"), 404
+
+# Internal Server Error
+@app.errorhandler(500)
+def page_not_found():
+	return render_template("500.html"), 500
 
 
 if __name__ == "__main__":
