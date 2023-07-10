@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="px-4 sm:px-6 lg:px-8">
+{% include 'navbar.html' %}
+<div class="px-12 sm:px-6 lg:px-8">
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">Usuarios Registrados en la DataBase</h1>
+      <h1 class="py-4 text-base font-semibold leading-6 text-gray-900">Usuarios Registrados en la DataBase</h1>
       <p class="mt-2 text-sm text-gray-700">Una lista de todos los usuarios registrados en la base de datos</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-      <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+      <button type="button" class="block rounded-md bg-azul px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul">
         <a href="/register">Agregar Usuario</a>
       </button>
     </div>
@@ -37,10 +37,10 @@
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ usuario.email }}</td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ usuario.rol }}</td>
               <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                <a href="{{ url_for('admin_edit', id=usuario.id) }}" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only"></span></a>
+                <a href="{{ url_for('admin_edit', id=usuario.id) }}" class="text-celeste hover:text-oscurito">Edit<span class="sr-only"></span></a>
               </td>
               <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                <a href="{{ url_for('eliminar_usuario', id=usuario.id) }}" class="text-indigo-600 hover:text-indigo-900">Eliminar<span class="sr-only"></span></a>
+                <a href="{{ url_for('eliminar_usuario', id=usuario.id) }}" class="text-azul hover:text-oscurito">Eliminar<span class="sr-only"></span></a>
               </td>
             </tr>
 
@@ -51,5 +51,5 @@
     </div>
   </div>
 </div>
-
+{% include 'footer.html' %}
 {% endblock %}

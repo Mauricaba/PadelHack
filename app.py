@@ -156,7 +156,7 @@ def register():
         if usuario is None:
             user_name = request.form['user_name']
             nombre = request.form['nombre']
-            rol = request.form['rol']
+            rol = 'Usuario'
             email = request.form['email']
             cedula = request.form['cedula']
             telefono = request.form['telefono']

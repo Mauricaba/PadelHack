@@ -42,7 +42,7 @@
                           Mi perfil
                         </a>
                       </li>
-                      {% if current_user.rol == 'Admin'%}
+                      {% if current_user.rol == 'Admin' or currente_user.id == '1' %}
                       <li>
                         <a href="{{url_for('admins')}}" class="text-gray-700 hover:text-azul hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                           <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-azul" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
