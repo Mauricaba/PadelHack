@@ -233,6 +233,7 @@
             </div>
 
               <!-- Tareas con checkbox -->
+              {% if current_user.rol == 'Admin' or current_user.rol == 'Funcionario'%}
               <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
                 <div class="px-4 py-5 sm:px-6">
                     <p> Tareas y Mantenimientos </p>
@@ -259,6 +260,7 @@
                     </fieldset>
                 </div>
               </div>
+              {% endif %}
           </div>
         </div>
       </main>
