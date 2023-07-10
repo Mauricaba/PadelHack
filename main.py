@@ -109,11 +109,9 @@ def admins():
 #Iniciar sesion
 @app.route("/login", methods = ["GET", "POST"])
 def login():
-<<<<<<< HEAD
+
     if current_user.is_authenticated:
         return redirect(url_for("dashboard"))
-=======
->>>>>>> Pulida
 
     formulario = Formulario_login()
     #validamos el formulario cuando se envie
