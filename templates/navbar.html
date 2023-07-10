@@ -1,6 +1,6 @@
 
 {% block content %}
-<nav class="bg-oscurito">
+<nav class="bg-azul">
     <div x-data="{show1: false}" class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
             <div class="flex items-center px-2 lg:px-0">
@@ -14,10 +14,10 @@
                 <a class="hidden h-8 w-auto lg:block" href="/"><p class="rounded-md px-3 py-auto text-xl font-medium text-casiwhite">PadelHack</p></a>
                 <div class="hidden lg:ml-6 lg:block">
                     <div class="flex space-x-4">
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Home</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Canchas</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Torneos</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Sobre Nosotros</a>
+                        <a href="/" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Home</a>
+                        <a href="/404" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Canchas</a>
+                        <a href="/404" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Torneos</a>
+                        <a href="contactos" class="rounded-md px-3 py-2 text-sm font-medium text-casiwhite hover:azul hover:text-casiwhite">Sobre Nosotros</a>
                     </div>
                 </div>
             </div>
@@ -75,10 +75,10 @@
         <!-- Mobile menu, show/hide based on menu state. -->
         <div x-show="show1" class="lg:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Home</a>
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Reservas</a>
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Canchas</a>
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Sobre Nosotros</a>
+                <a href="/" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Home</a>
+                <a href="/404" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Reservas</a>
+                <a href="/404" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Canchas</a>
+                <a href="/contactos" class="block rounded-md px-3 py-2 text-base font-medium text-casiwhite hover:azul hover:text-casiwhite">Sobre Nosotros</a>
             </div>
             <div class="border-t border-gray-700 pb-3 pt-4">
                 <div class="flex items-center px-5">
