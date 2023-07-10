@@ -109,6 +109,7 @@ def admins():
 #Iniciar sesion
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+
     formulario = Formulario_login()
     #validamos el formulario cuando se envie
     if formulario.validate_on_submit():
