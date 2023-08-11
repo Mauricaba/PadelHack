@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,800;1,800&family=M+PLUS+Rounded+1c:wght@700;800&family=Signika&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
+

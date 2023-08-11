@@ -10,12 +10,12 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img href="/" class="mx-auto h-24 w-auto" src="static/LogoPadelHack.svg" alt="PadelHack">
       <div class="flex justify-center">
-      <a href="#" class="text-5xl font-bold leading-6 tracking-tight text-[#003b57]">PadelHack</a>
+      <a href="#" class="mt-2 text-5xl font-mplus leading-6 tracking-tight text-celeste">PadelHack</a>
       </div>
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Iniciar sesion</h2>
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="space-y-6" action="{{url_for('login')}}" method="POST">
         {{ formulario.hidden_tag() }}
         <div>
@@ -29,7 +29,7 @@
           <div class="flex items-center justify-between">
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Contraseña</label>
             <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-800 hover:text-indigo-800">Olvidaste tu contraseña?</a>
+              <a href="#" class="font-semibold text-azuloutline-azul hover:text-azuloutline-azul">Olvidaste tu contraseña?</a>
             </div>
           </div>
           <div class="mt-2">
@@ -38,13 +38,13 @@
         </div>
 
         <div>
-          <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-800">Accede a tu cuenta</button>
+          <button type="submit" class="flex w-full justify-center rounded-md bg-azul px-3 py-1.5 text-sm font-semibold leading-6 text-casiwhite shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul">Accede a tu cuenta</button>
         </div>
       </form>
 
       <p class="mt-10 text-center text-sm text-gray-500">
         No sos miembro?
-        <a href="/register" class="font-semibold leading-6 text-indigo-800 hover:text-indigo-500"> Registrate ahora gratis! </a>
+        <a href="/register" class="font-semibold leading-6 text-azul hover:text-oscurito"> Registrate ahora gratis! </a>
       </p>
     </div>
   </div>

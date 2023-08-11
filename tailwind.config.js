@@ -3,27 +3,30 @@ module.exports = {
   content: [
       "./templates/**/*.html",
       "./static/src/**/*.js",
-      "./node_modules/flowbite/**/*.js",
       "./src/**/*.{html,js}",
   ],
   theme: {
-    extend: {,
+    extend: {
   },
     colors: {
-      'oscurito': '#011b35',
-      'azul': '#003b57',
-      'celeste': '#9dc3d7',
-      'celestito': '#d2dfe6',
-      'casiwhite': '#fafefd',
+      'oscurito': '#011B35',
+      'azul': '#003B57',
+      'celeste': '#9DC3D7',
+      'celestito': '#D2DFE6',
+      'casiwhite': '#FAFEFD',
+      'verde': '#D0FDD7'
   },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
+      sans: ['Signika', 'sans-serif'],
+      serif: ['Asap', 'sans-serif'],
+      mplus: ['"M PLUS Rounded 1c"', 'sans-serif'],
   },
     plugins: [
-      require("flowbite/plugin"),
-      require('@tailwindcss/forms'),
+      require("@tailwindcss/forms"),
+      // require("@tailwindcss/typography"),
+      // require("@tailwindcss/aspect-ratio"),
+      // require("@tailwindcss/line-clamp")
   ],
-}
+  }
 }
 

@@ -293,14 +293,14 @@ def contact():
 
 # URL invalida
 @app.errorhandler(404)
-def page_not_found():
-	return render_template("404.html"), 404
+def page_not_found_(error):
+	return render_template("404error.html"), 404
 
 # Internal Server Error
 @app.errorhandler(500)
-def page_not_found():
+def page_not_found(error):
 	return render_template("500.html"), 500
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=6500,debug=True)
+    app.run(host='127.0.0.1', port=6600,debug=True)
